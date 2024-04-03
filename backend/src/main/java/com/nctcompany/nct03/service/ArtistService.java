@@ -11,4 +11,5 @@ public interface ArtistService {
     List<ArtistResponse> getAllArtists();
     ArtistDetails getArtistDetails(Long artistId);
     List<SongResponse> getSongsByArtist(Long artistId);
+    List<ArtistResponse> searchArtists(String keyword);
 }

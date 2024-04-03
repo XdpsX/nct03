@@ -25,8 +25,6 @@ public class SongSerivceImpl implements SongService {
 
     private final SongRepository songRepository;
 
-    private final List<String> allSearchBy = Arrays.asList("name", "artist");
-
     @Override
     public List<SongResponse> getRecentlyReleasedSong() {
         List<Song> songs = songRepository.findTop5ByOrderByReleasedOnDesc();
@@ -44,26 +42,8 @@ public class SongSerivceImpl implements SongService {
     }
 
     @Override
-    public List<SongResponse> searchSongs(String searchBy, String keyword) {
-        if (!allSearchBy.contains(searchBy.toLowerCase())){
-            throw new BadRequestException("Can not search song by " + searchBy);
-        }
-        if (searchBy.toLowerCase().equals("artist")){
-            return searchSongsByArtistName(keyword);
-        }else {
-            return searchSongsByName(keyword);
-        }
-    }
-
-    private List<SongResponse> searchSongsByName(String name) {
-        List<Song> songs = songRepository.findByNameContainingIgnoreCase(name);
-        return songs.stream()
-                .map(SongMapper::mapToSongResponse)
-                .collect(Collectors.toList());
-    }
-
-    private List<SongResponse> searchSongsByArtistName(String artistName) {
-        List<Song> songs = songRepository.findByArtistsNameContainingIgnoreCase(artistName);
+    public List<SongResponse> searchSongs(String keyword) {
+        List<Song> songs = songRepository.findByNameContainingIgnoreCase(keyword);
         return songs.stream()
                 .map(SongMapper::mapToSongResponse)
                 .collect(Collectors.toList());

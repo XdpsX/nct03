@@ -11,8 +11,6 @@ public interface SongService {
 
     List<SongResponse> getRecentlyReleasedSong();
     SongResponse getSongById(Long id);
-    List<SongResponse> searchSongs(String searchBy, String keyword);
+    List<SongResponse> searchSongs(String keyword);
     SongResponse createSong(SongRequest songRequest) throws IOException;
-//    List<SongResponse> searchSongsByName(String name);
-//    List<SongResponse> searchSongsByArtistName(String artistName);
 }

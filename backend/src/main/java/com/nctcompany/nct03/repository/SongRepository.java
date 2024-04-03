@@ -9,5 +9,4 @@ public interface SongRepository extends JpaRepository<Song, Long> {
 
     List<Song> findTop5ByOrderByReleasedOnDesc();
     List<Song> findByNameContainingIgnoreCase(String name);
-    List<Song> findByArtistsNameContainingIgnoreCase(String artistName);
 }

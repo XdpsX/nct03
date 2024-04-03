@@ -9,10 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -64,5 +61,17 @@ public class ArtistController {
             @PathVariable Long artistId
     ){
         return ResponseEntity.ok(artistService.getSongsByArtist(artistId));
+    }
+
+    @Operation(
+            summary = "Search Artists by name"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "Http Status 200 OK"
+    )
+    @GetMapping("/search")
+    public ResponseEntity<List<ArtistResponse>> searchArtists(@RequestParam String keyword) {
+        return ResponseEntity.ok(artistService.searchArtists(keyword));
     }
 }

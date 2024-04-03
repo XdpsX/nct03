@@ -51,15 +51,15 @@ public class SongController {
     }
 
     @Operation(
-            summary = "Search Songs By Song name or Artist name"
+            summary = "Search Songs by name"
     )
     @ApiResponse(
             responseCode = "200",
             description = "Http Status 200 OK"
     )
     @GetMapping("/search")
-    public ResponseEntity<List<SongResponse>> searchSongs(@RequestParam String keyword, @RequestParam String searchBy) {
-        return ResponseEntity.ok(songService.searchSongs(searchBy, keyword));
+    public ResponseEntity<List<SongResponse>> searchSongs(@RequestParam String keyword) {
+        return ResponseEntity.ok(songService.searchSongs(keyword));
     }
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})

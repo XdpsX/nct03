@@ -44,4 +44,12 @@ public class ArtistServiceImpl implements ArtistService {
                 .map(SongMapper::mapToSongResponse)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<ArtistResponse> searchArtists(String keyword) {
+        List<Artist> artists = artistRepository.findByNameContainingIgnoreCase(keyword);
+        return artists.stream()
+                .map(ArtistMapper::mapToResponse)
+                .collect(Collectors.toList());
+    }
 }
