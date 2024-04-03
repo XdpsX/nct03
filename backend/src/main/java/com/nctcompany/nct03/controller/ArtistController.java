@@ -1,6 +1,8 @@
 package com.nctcompany.nct03.controller;
 
+import com.nctcompany.nct03.dto.artist.ArtistDetails;
 import com.nctcompany.nct03.dto.artist.ArtistResponse;
+import com.nctcompany.nct03.dto.song.SongResponse;
 import com.nctcompany.nct03.service.ArtistService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -8,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,5 +36,33 @@ public class ArtistController {
     @GetMapping
     public ResponseEntity<List<ArtistResponse>> getAllArtists(){
         return ResponseEntity.ok(artistService.getAllArtists());
+    }
+
+    @Operation(
+            summary = "Read Artist Details"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "Http Status 200 OK"
+    )
+    @GetMapping("/{artistId}")
+    public ResponseEntity<ArtistDetails> getArtistDetails(
+            @PathVariable Long artistId
+    ){
+        return ResponseEntity.ok(artistService.getArtistDetails(artistId));
+    }
+
+    @Operation(
+            summary = "Read Artist's Songs"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "Http Status 200 OK"
+    )
+    @GetMapping("/{artistId}/songs")
+    public ResponseEntity<List<SongResponse>> getSongsByArtist(
+            @PathVariable Long artistId
+    ){
+        return ResponseEntity.ok(artistService.getSongsByArtist(artistId));
     }
 }

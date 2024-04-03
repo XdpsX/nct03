@@ -1,6 +1,7 @@
 package com.nctcompany.nct03.mapper;
 
 import com.nctcompany.nct03.constant.ApplicationConstants;
+import com.nctcompany.nct03.dto.artist.ArtistDetails;
 import com.nctcompany.nct03.dto.artist.ArtistResponse;
 import com.nctcompany.nct03.model.Artist;
 
@@ -21,5 +22,10 @@ public class ArtistMapper {
         artistResponse.setPhoto(photo);
 
         return artistResponse;
+    }
+
+    public static ArtistDetails mapToDetails(Artist artist){
+        ArtistResponse artistResponse = mapToResponse(artist);
+        return new ArtistDetails(artistResponse, artist.getAbout());
     }
 }
